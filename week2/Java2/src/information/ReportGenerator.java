@@ -59,7 +59,8 @@ public class ReportGenerator {
 			}
 
 
-			String newTransactionKey = clientId + "_" + securityId + "_" + record[5].toString() + "_" + transactionType;
+			String newTransactionKey = clientId + "_" + securityId + "_" + record[5].toString() + name + "_"
+					+ transactionType;
 			if (newTransaction.getTransactionType().contentEquals("Buy")) {
 				if (!transactions.containsKey(newTransactionKey)) {
 					transactions.put(newTransactionKey, newTransaction);
@@ -70,7 +71,7 @@ public class ReportGenerator {
 					newTransaction.setTransactionCharge("50");
 				}
 			} else if (newTransaction.getTransactionType().contentEquals("Sell")) {
-				String checkBuyKey = clientId + "_" + securityId + "_" + record[5].toString() + "_" + "Buy";
+				String checkBuyKey = clientId + "_" + securityId + "_" + record[5].toString() + name + "_" + "Buy";
 				if (!transactions.containsKey(checkBuyKey)) {
 					transactions.put(newTransactionKey, newTransaction);
 					if (newTransaction.getPriority().contentEquals("Y")) {
