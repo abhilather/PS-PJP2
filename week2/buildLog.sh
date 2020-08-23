@@ -1,1 +1,0 @@
-mvn help --log-file mvnBuildLog.txt

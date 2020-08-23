@@ -1,1 +1,0 @@
-mvn install:install-file -Dfile="C:\Users\Abhimanyu\Desktop\PJP2 Assignments\week2\MavenScript\target\MavenScript-0.0.1-SNAPSHOT.jar" -DgroupId="com.sapient.training.2" -DartifactId="MavenScript" -Dversion="0.0.1-SNAPSHOT" -Dpackaging="jar"
