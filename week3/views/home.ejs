@@ -1,0 +1,115 @@
+<html>
+
+<head>
+    <title>Date Calculator Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Date Calculator</h1>
+            <p>(Reloading same page again will lead to performing same operation)</p>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <form action="/" method="POST">
+                    <div class="form-group row">
+                        <label for="example-date-input" class="col-2 col-form-label">Choose a Date</label>
+                        <div class="col-10">
+                            <input class="form-control" type="date" value="<%= new Date() %>" name="inputDate"
+                                id="example-date-input" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Select an Operation</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="operation">
+                            <option value="today">Today</option>
+                            <option value="yesterday">Yesterday</option>
+                            <option value="day-before-yesterday">Day Before Yesterday</option>
+                            <option value="tomorrow">Tomorrow</option>
+                            <option value="day-after-tomorrow">Day After Tomorrow</option>
+                            <option value="last-week">Last/Previous Week</option>
+                            <option value="next-week">Next Week</option>
+                            <option value="last-month">Last Month/ Month Before</option>
+                            <option value="next-month">Next Month/ Month After</option>
+                            <option value="last-year">Last/Previous Year</option>
+                            <option value="next-year">Next Year</option>
+                            <option class="custom-input" value="days-from-now">N days from now</option>
+                            <option class="custom-input" value="days-earlier">N days earlier</option>
+                            <option class="custom-input" value="months-from-now">N months from now</option>
+                            <option class="custom-input" value="months-earlier">N months earlier</option>
+                            <option class="custom-input" value="years-from-now">N years from now</option>
+                            <option class="custom-input" value="years-earlier">N years earlier</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputOperationValue">Email address</label>
+                        <input disabled="disabled" type="number" class="form-control" name="operationValue"
+                            id="inputOperationValue" placeholder="Enter a value for the selected operation" min="1">
+                        <script>
+                            $(document).ready(function () {
+
+                            })
+                        </script>
+                    </div>
+
+                    <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" id="result">
+                <h3>Result: </h3>
+                <% if(result){ %>
+                <strong><%= result %></strong>
+                <% } %>
+            </div>
+            <div class="col-md-6" id="operations">
+                <h3>Operations</h3>
+                <% if(operations){ %>
+                    <ul>
+                        <% operations.forEach((operation) => { %>
+                            <li><%= operation %></li>
+                        <% }) %>
+                    </ul>
+
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("select").change(function () {
+                
+                let operationClass = $(this).find("option:selected").attr("class")
+                if (operationClass === 'custom-input') {
+                    $("input[type='number']").removeAttr("disabled")
+                } else {
+                    $("input[type='number']").attr("disabled", "disabled")
+                }
+                
+            })
+            $("#inputOperationValue").change(function (value) {
+                let operationValue = $(this).val();
+                $(this).val(Math.max(operationValue, 1))
+            })
+        })
+
+    </script>
+
+</body>
+
+</html>

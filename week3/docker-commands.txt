@@ -1,0 +1,3 @@
+Building Docker Image: docker build . date-calculator-app
+
+Building entire stack: docker-compose ip
