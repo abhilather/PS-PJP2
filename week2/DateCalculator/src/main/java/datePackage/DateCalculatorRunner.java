@@ -1,6 +1,7 @@
 package datePackage;
 
 import java.io.IOException;
+//import java.sql.Timestamp;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,9 +16,11 @@ public class DateCalculatorRunner {
 		boolean entireRepeat = true;
 		LocalDate result;
 		Operation operationToBeSerialized;
-		ArrayList<Operation> operationsList = new ArrayList<>();
+		ArrayList<Operation> operationsList = new ArrayList<Operation>();
 		OperationGenerator generator = new OperationGenerator();
 		int operationCount = 0;
+		//		Timestamp sessionId = new Timestamp(System.currentTimeMillis());
+		Session session = new Session(1);
 
 		while(entireRepeat) {
 			boolean currentRepeat = true;
@@ -457,6 +460,7 @@ public class DateCalculatorRunner {
 		}
 
 		System.out.println(operationsList);
+		session.setSessionOperationList(operationsList);
 		serializer = new OperationListSerializer(operationsList);
 		serializer.serliazeOperation();
 		//
